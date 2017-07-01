@@ -23,8 +23,10 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
     
+    let x = Compute(with_data: [6, 2, 3, 4, 7, 1, 9, 11])
+    // Do any additional setup after loading the view, typically from a nib.
+    /*
     metal_device = MTLCreateSystemDefaultDevice()
     metal_layer = CAMetalLayer()
     metal_layer.device = metal_device
@@ -58,6 +60,7 @@ class ViewController: UIViewController {
     render()
 //    let timer = CADisplayLink(target: self, selector: #selector(render))
 //    timer.add(to: .main, forMode: .defaultRunLoopMode)
+ */
   }
 
   override func didReceiveMemoryWarning() {

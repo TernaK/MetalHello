@@ -14,6 +14,7 @@
 		517AFD781F06417F00E29672 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 517AFD761F06417F00E29672 /* LaunchScreen.storyboard */; };
 		517AFD801F06443200E29672 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 517AFD7F1F06443200E29672 /* Shaders.metal */; };
 		517AFD821F064C2600E29672 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 517AFD811F064C2600E29672 /* README.md */; };
+		517AFD841F0772CB00E29672 /* Compute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517AFD831F0772CB00E29672 /* Compute.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		517AFD791F06417F00E29672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		517AFD7F1F06443200E29672 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		517AFD811F064C2600E29672 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		517AFD831F0772CB00E29672 /* Compute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compute.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				517AFD761F06417F00E29672 /* LaunchScreen.storyboard */,
 				517AFD791F06417F00E29672 /* Info.plist */,
 				517AFD7F1F06443200E29672 /* Shaders.metal */,
+				517AFD831F0772CB00E29672 /* Compute.swift */,
 			);
 			path = MetalHello;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 				517AFD701F06417F00E29672 /* ViewController.swift in Sources */,
 				517AFD821F064C2600E29672 /* README.md in Sources */,
 				517AFD6E1F06417F00E29672 /* AppDelegate.swift in Sources */,
+				517AFD841F0772CB00E29672 /* Compute.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
