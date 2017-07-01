@@ -13,6 +13,7 @@ class ViewController: UIViewController {
   
   var metal_device: MTLDevice!
   var metal_layer: CAMetalLayer!
+  var command_queue: MTLCommandQueue!
   var pipeline_state: MTLRenderPipelineState!
   
   var vertex_buffer: MTLBuffer!
@@ -42,11 +43,21 @@ class ViewController: UIViewController {
     let fragment_shader = metal_library?.makeFunction(name: "fragment_shader")
     
     let pipeline_state_descriptor = MTLRenderPipelineDescriptor()
+    pipeline_state_descriptor.label = "render_pipeline"
     pipeline_state_descriptor.vertexFunction = vertex_shader
     pipeline_state_descriptor.fragmentFunction = fragment_shader
     pipeline_state_descriptor.colorAttachments[0].pixelFormat = metal_layer.pixelFormat
     
-    pipeline_state = try! metal_device.makeRenderPipelineState(descriptor: pipeline_state_descriptor)
+    pipeline_state = try? metal_device.makeRenderPipelineState(descriptor: pipeline_state_descriptor)
+    if pipeline_state == nil {
+      print("could not setup pipeline")
+    }
+    
+    command_queue = metal_device.makeCommandQueue()
+    
+    render()
+//    let timer = CADisplayLink(target: self, selector: #selector(render))
+//    timer.add(to: .main, forMode: .defaultRunLoopMode)
   }
 
   override func didReceiveMemoryWarning() {
@@ -54,6 +65,24 @@ class ViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
 
-
+  @objc func render() {
+    let drawable = metal_layer.nextDrawable()
+    let render_pass_descriptor = MTLRenderPassDescriptor()
+    render_pass_descriptor.colorAttachments[0].texture = drawable?.texture
+    render_pass_descriptor.colorAttachments[0].clearColor = .init(red: 0.7, green: 0.1, blue: 0.6, alpha: 1.0);
+    render_pass_descriptor.colorAttachments[0].loadAction = .clear
+    
+    let command_buffer = command_queue.makeCommandBuffer()
+    let command_encoder = command_buffer?.makeRenderCommandEncoder(descriptor: render_pass_descriptor)
+    command_encoder?.setRenderPipelineState(pipeline_state)
+    command_encoder?.setVertexBuffer(vertex_buffer, offset: 0, index: 0)
+    command_encoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3)
+    command_encoder?.endEncoding()
+    
+    command_buffer?.present(drawable!)
+    
+    command_buffer?.commit()
+  }
+  
 }
 
