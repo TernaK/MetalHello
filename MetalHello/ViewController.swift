@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     metal_layer.device = metal_device
     metal_layer.framebufferOnly = true
     metal_layer.pixelFormat = .bgra8Unorm
-    metal_layer.frame = view.layer.frame
+    metal_layer.frame = CGRect(x: 100, y: 100, width: 200, height: 200)//view.layer.frame
     view.layer.addSublayer(metal_layer)
     
     // vertex data
