@@ -27,3 +27,27 @@ kernel void power2_kernel(constant float *_A [[buffer(0)]],
   	_B[tid] = _A[tid] * _A[tid];
 }
 
+struct VertexDataOut {
+  float4 position [[position]];
+  float2 tex_coord;
+};
+
+struct VertexDataIn {
+  packed_float3 position;
+  packed_float2 tex_coord;
+};
+
+vertex VertexDataOut vert_tex_shader(constant VertexDataIn *vert_in [[buffer(0)]],
+                                     uint v_id [[vertex_id]]) {
+  VertexDataOut vert_out;
+  vert_out.position = float4(vert_in[v_id].position, 1.0);
+  vert_out.tex_coord = vert_in[v_id].tex_coord;
+  return vert_out;
+}
+
+constexpr constant sampler tex_sampler(mag_filter::linear, min_filter::linear);
+
+fragment float4 frag_tex_shader(VertexDataOut frag_in [[stage_in]],
+                                texture2d<half> tex_in [[texture(0)]]) {
+  return float4(tex_in.sample(tex_sampler, frag_in.tex_coord));
+}
